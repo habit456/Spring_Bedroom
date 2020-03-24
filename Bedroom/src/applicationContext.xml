@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<context:property-placeholder location="classpath:bedroom.properties"/>
+    <!-- Define your beans here -->
+    <bean id="dimensions" class="joshuakaplan.bedroom.Dimensions">
+    	<constructor-arg index="0" value="10" />
+    	<constructor-arg index="1" value="10" />
+    	<constructor-arg index="2" value="10" />
+    </bean>
+    
+    <bean id="lamp" class="joshuakaplan.bedroom.Lamp">
+    	<constructor-arg index="0" value="${lamp.type}" />
+    	<constructor-arg index="1" ref="dimensions"/>
+    	<constructor-arg>
+    		<array value-type="java.lang.String">
+    			<value>${lamp.adj1}</value>
+    			<value>${lamp.adj2}</value>
+    		</array>
+    	</constructor-arg>
+	</bean>
+	
+	<bean id="floor" class="joshuakaplan.bedroom.Floor">
+		<constructor-arg index="0" value="${floor.type}" />
+		<constructor-arg index="1" ref="dimensions" />
+		<constructor-arg>
+			<array value-type="java.lang.String">
+				<value>${floor.adj1}</value>
+				<value>${floor.adj2}</value>
+			</array>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="walls" class="joshuakaplan.bedroom.Walls">
+		<constructor-arg index="0" value="${walls.type}" />
+		<constructor-arg index="1" ref="dimensions" />
+		<constructor-arg>
+			<array value-type="java.lang.String">
+				<value>${walls.adj1}</value>
+				<value>${walls.adj2}</value>
+				<value>${walls.adj3}</value>
+			</array>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="sheets" class="joshuakaplan.bedroom.Sheets">
+		<constructor-arg index="0" value="${sheets.type}" />
+		<constructor-arg index="1" ref="dimensions" />
+		<constructor-arg>
+			<array value-type="java.lang.String">
+				<value>${sheets.adj1}</value>
+			</array>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="mattress" class="joshuakaplan.bedroom.Mattress">
+		<constructor-arg index="0" value="${mattress.type}" />
+		<constructor-arg index="1" ref="dimensions" />
+		<constructor-arg>
+			<array value-type="java.lang.String">
+				<value>${mattress.adj1}</value>
+				<value>${mattress.adj2}</value>
+			</array>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="bed" class="joshuakaplan.bedroom.Bed">
+		<constructor-arg name="type" value="${bed.type}" />
+		<constructor-arg ref="dimensions" />
+		<constructor-arg ref="sheets" />
+		<constructor-arg ref="mattress" />
+		<constructor-arg>
+			<array value-type="java.lang.String">
+				<value>${bed.adj1}</value>
+			</array>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="bedroom" class="joshuakaplan.bedroom.Bedroom">
+		<constructor-arg ref="bed" />
+		<constructor-arg ref="dimensions" />
+		<constructor-arg ref="floor" />
+		<constructor-arg ref="walls" />
+		<constructor-arg ref="lamp" />
+	</bean>
+</beans>
+
+
+
+
+
